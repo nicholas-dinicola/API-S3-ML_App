@@ -4,8 +4,6 @@ import pytest
 import sys
 import os.path
 
-print(os.system("pwd"))
-
 sys.path.insert(0, "/home/runner/work/API-S3-ML_App/API-S3-ML_App/starter/starter/ml/")
 from data import process_data
 from model import train_model, compute_model_metrics, inference, save_model
@@ -21,7 +19,7 @@ def data():
     data: pd.DataFrame
     """
     # Add code to load in the data.
-    data = pd.read_csv("/home/nicolas/Desktop/API-S3-ML_App/starter/data/census_no_spaces.csv")
+    data = pd.read_csv("/home/runner/work/API-S3-ML_App/API-S3-ML_App/starter/data/census_no_spaces.csv")
 
     return data
 
@@ -176,10 +174,10 @@ def test_save_model(data):
 
     model = train_model(X_train, y_train)
     # Save the mdoel.
-    file_pth = "/home/nicolas/Desktop/API-S3-ML_App/starter/model/"
+    file_pth = "/home/runner/work/API-S3-ML_App/API-S3-ML_App/starter/model/"
 
     save_model(model=model, pth=file_pth, name="my_model")
 
-    my_file = "/home/nicolas/Desktop/API-S3-ML_App/starter/model/my_model.joblib"
+    my_file = "/home/runner/work/API-S3-ML_App/API-S3-ML_App/starter/model/my_model.joblib"
 
     assert os.path.isfile(my_file), f"Model not saved as expected"
