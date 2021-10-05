@@ -1,5 +1,4 @@
 # Script to train machine learning model.
-import sys
 from starter.demo.ml.data import process_data
 from starter.demo.ml.model import train_model, compute_model_metrics, inference, save_model
 import pandas as pd
