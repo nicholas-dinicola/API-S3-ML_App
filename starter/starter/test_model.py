@@ -4,6 +4,8 @@ import pytest
 import sys
 import os.path
 
+print(os.system("pwd"))
+
 sys.path.insert(0, "./API-S3-ML_App/starter/starter/ml/")
 from data import process_data
 from model import train_model, compute_model_metrics, inference, save_model
