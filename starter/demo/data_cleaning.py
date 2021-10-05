@@ -1,7 +1,10 @@
 import pandas as pd
-
+import os
+import starter
 # read the csv file
-df = pd.read_csv("data/census.csv")
+
+root_dir = os.path.basename(os.path.abspath(starter.__file__))
+df = pd.read_csv(os.path.join(root_dir, "data", "census.csv"))
 
 # remove spaces in column names
 df.columns = df.columns.str.replace(' ', '')

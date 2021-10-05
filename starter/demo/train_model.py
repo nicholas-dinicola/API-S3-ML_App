@@ -1,8 +1,7 @@
 # Script to train machine learning model.
 import sys
-sys.path.insert(0, "/home/nicolas/Desktop/API-S3-ML_App/starter/starter/ml/")
-from data import process_data
-from model import train_model, compute_model_metrics, inference, save_model
+from starter.demo.ml.data import process_data
+from starter.demo.ml.model import train_model, compute_model_metrics, inference, save_model
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from joblib import dump
@@ -10,7 +9,7 @@ from joblib import dump
 # Add the necessary imports for the starter code.
 
 # Add code to load in the data.
-data = pd.read_csv("/home/nicolas/Desktop/API-S3-ML_App/starter/data/census_no_spaces.csv")
+data = pd.read_csv("/starter/data/census_no_spaces.csv")
 
 # Optional enhancement, use K-fold cross validation instead of a train-test split.
 train, test = train_test_split(data, test_size=0.20, random_state=42, stratify=data["salary"])
@@ -57,7 +56,7 @@ print(
     f"Train fbeta: {fbeta}")
 
 # Save the mdoel.
-file_pth = "/home/nicolas/Desktop/API-S3-ML_App/starter/model/"
+file_pth = "/starter/model/"
 
 save_model(model=model, pth=file_pth, name="my_model")
 
