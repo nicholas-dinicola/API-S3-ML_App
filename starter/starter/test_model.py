@@ -5,7 +5,7 @@ import sys
 import os.path
 
 sys.path.insert(0, "/home/nicolas/Desktop/API-S3-ML_App/starter/starter/ml/")
-from data import process_data
+#from data import process_data
 from model import train_model, compute_model_metrics, inference, save_model
 from sklearn.model_selection import train_test_split
 
