@@ -5,6 +5,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from joblib import dump
 import os.path
+import sys
 
 root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -16,14 +17,14 @@ data = pd.read_csv(os.path.join(root, "data", "census_no_spaces.csv"))
 # Train the model on slices of data: cat features > sex ("Female", "Male")
 for s in data.sex.unique():
     print(s)
-    data["sex"] = data[data["sex"] == s]
+    data_slice = data[data["sex"] == s]
     if s == " Male":
-        data["sex"].replace(s, 0, inplace=True)
+        data_slice["sex"] = data["sex"].replace(s, 0)
     else:
-        data["sex"].replace(" Female", 1, inplace=True)
+        data_slice["sex"] = data["sex"].replace(" Female", 1)
 
     # split dataset into training and testing
-    train, test = train_test_split(data, test_size=0.20, random_state=42, stratify=data["salary"])
+    train, test = train_test_split(data_slice, test_size=0.20, random_state=42, stratify=data_slice["salary"])
 
     cat_features = [
         "workclass",
@@ -50,9 +51,35 @@ for s in data.sex.unique():
 
     # Test the model
     preds = inference(model=model, X=X_test)
-    precision, recall, fbeta = compute_model_metrics(y=y_test, preds=preds)
+    if s == " Male":
+        m = s
+        precision_m, recall_m, fbeta_m = compute_model_metrics(y=y_test, preds=preds)
 
-    print(
-        f"Train precision: {precision},\n"
-        f"Train recall: {precision},\n"
-        f"Train fbeta: {fbeta}")
+        print(
+            f"Slice for: {m},\n"
+            f"Precision: {precision_m},\n"
+            f"Recall: {recall_m},\n"
+            f"Fbeta: {fbeta_m}")
+    else:
+        f = s
+        precision_f, recall_f, fbeta_f = compute_model_metrics(y=y_test, preds=preds)
+
+        print(
+            f"Slice for: {f},\n"
+            f"Precision: {precision_f},\n"
+            f"Recall: {recall_f},\n"
+            f"Fbeta: {fbeta_f}")
+
+sys.stdout = open(os.path.join(root, "model", "slice_output.txt"), "w")
+print(
+    f"Slice for: {m},\n"
+            f"Precision: {precision_m},\n"
+            f"Recall: {recall_m},\n"
+            f"Fbeta: {fbeta_m}, \n\n\n"
+            f"Slice for: {f},\n"
+            f"Precision: {precision_f},\n"
+            f"Recall: {recall_f},\n"
+            f"Fbeta: {fbeta_f}"
+
+)
+sys.stdout.close()

@@ -1,0 +1,10 @@
+Slice for:  Male,
+Precision: 0.7877813504823151,
+Recall: 0.5518018018018018,
+Fbeta: 0.6490066225165563, 
+
+
+Slice for:  Female,
+Precision: 0.8450704225352113,
+Recall: 0.5084745762711864,
+Fbeta: 0.6349206349206349
