@@ -1,15 +1,19 @@
 # Script to train machine learning model.
-from starter.demo.ml.data import process_data
-from starter.demo.ml.model import train_model, compute_model_metrics, inference, save_model
+from ml.data import process_data
+from ml.model import train_model, compute_model_metrics, inference, save_model
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from joblib import dump
+import os.path
 
-# Add the necessary imports for the starter code.
+root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+data = pd.read_csv(os.path.join(root, "data", "census_no_spaces.csv"))
 
 # Add code to load in the data.
-data = pd.read_csv("/starter/data/census_no_spaces.csv")
+#data = pd.read_csv("/starter/data/census_no_spaces.csv")
 
+# Train the model on slices of data: cat features > sex ("Female", "Male")
 for s in data.sex.unique():
     print(s)
     data["sex"] = data[data["sex"] == s]

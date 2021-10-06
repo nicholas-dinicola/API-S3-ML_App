@@ -1,14 +1,15 @@
 # Script to train machine learning model.
-from starter.demo.ml.data import process_data
-from starter.demo.ml.model import train_model, compute_model_metrics, inference, save_model
+from ml.data import process_data
+from ml.model import train_model, compute_model_metrics, inference, save_model
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from joblib import dump
+import os
 
-# Add the necessary imports for the starter code.
+root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Add code to load in the data.
-data = pd.read_csv("/starter/data/census_no_spaces.csv")
+data = pd.read_csv(os.path.join(root, "data", "census_no_spaces.csv"))
 
 # Optional enhancement, use K-fold cross validation instead of a train-test split.
 train, test = train_test_split(data, test_size=0.20, random_state=42, stratify=data["salary"])
@@ -35,7 +36,7 @@ X_test, y_test, encoder, lb, scaler = process_data(
 
 # Save the encoded features
 encoded_features = pd.concat([pd.DataFrame(X_train), pd.DataFrame(X_train)], axis=0)
-encoded_features.to_csv("/home/nicolas/Desktop/API-S3-ML_App/starter/data/encoded_features.csv", index=False)
+encoded_features.to_csv(os.path.join(root, "data", "encoded_features.csv"), index=False)
 
 # Check the dataset have correctly been split
 print(f"Split dataset {X_train.shape, X_test.shape, y_train.shape, y_test.shape}")

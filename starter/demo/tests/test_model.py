@@ -4,11 +4,19 @@ import pytest
 import sys
 import os.path
 import starter
+import logging
 from starter.demo.ml.data import process_data
 from starter.demo.ml.model import train_model, compute_model_metrics, inference, save_model
 from sklearn.model_selection import train_test_split
 
-root_dir = os.path.basename(os.path.abspath(starter.__file__))
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)-15s %(message)s")
+logger = logging.getLogger()
+
+#root_dir = os.path.basename(os.path.abspath(starter.__file__))
+#root_dir = os.path.abspath(starter.__file__)
+root_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+logger.info(f"Abs Path: {root_dir}")
 
 @pytest.fixture()
 def data():
