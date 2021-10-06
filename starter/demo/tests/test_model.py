@@ -16,7 +16,7 @@ logger = logging.getLogger()
 #root_dir = os.path.basename(os.path.abspath(starter.__file__))
 #root_dir = os.path.abspath(starter.__file__)
 root_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-logger.info(f"Abs Path: {root_dir}")
+print(f"Abs Path: {root_dir}")
 
 @pytest.fixture()
 def data():
