@@ -5,7 +5,6 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from joblib import dump
 import os
-import starter
 
 root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
