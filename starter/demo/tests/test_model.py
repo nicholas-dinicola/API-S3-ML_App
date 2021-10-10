@@ -1,7 +1,6 @@
 # Import modules
 import pandas as pd
 import pytest
-import sys
 import os.path
 import starter
 import logging
@@ -13,9 +12,9 @@ from sklearn.model_selection import train_test_split
 logging.basicConfig(level=logging.INFO, format="%(asctime)-15s %(message)s")
 logger = logging.getLogger()
 
-#root_dir = os.path.basename(os.path.abspath(starter.__file__))
+root_dir = os.path.basename(os.path.abspath(starter.__file__))
 #root_dir = os.path.abspath(starter.__file__)
-root_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+#root_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 logger.info(f"Abs Path: {root_dir}")
 
 @pytest.fixture()
