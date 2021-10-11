@@ -182,5 +182,5 @@ def test_save_model(data):
     # Save the mdoel.
     save_to_file(model.best_estimator_, os.path.join(root_dir, "model", "classifier"))
 
-    my_file = os.path.join(model_dir, "my_model.joblib")
+    my_file = os.path.join(root_dir, "my_model.joblib")
     assert os.path.isfile(my_file), f"Model not saved as expected"
