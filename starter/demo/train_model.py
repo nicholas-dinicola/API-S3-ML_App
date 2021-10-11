@@ -7,6 +7,7 @@ from joblib import dump
 import os
 
 root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+print(root)
 
 # Add code to load in the data.
 data = pd.read_csv(os.path.join(root, "data", "census_no_spaces.csv"))
@@ -48,6 +49,7 @@ print(f"Split dataset {model.best_estimator_}")
 
 # Test the model
 preds = inference(model=model, X=X_test)
+
 precision, recall, fbeta = compute_model_metrics(y=y_test, preds=preds)
 
 print(
@@ -55,8 +57,8 @@ print(
     f"Train recall: {precision},\n"
     f"Train fbeta: {fbeta}")
 
-# Save the mdoel.
-file_pth = "/starter/model/"
+# Save the model.
+file_pth = os.path.join(root, "model")
 
 save_model(model=model, pth=file_pth, name="my_model")
 
