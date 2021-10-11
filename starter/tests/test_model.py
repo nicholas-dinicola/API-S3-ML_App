@@ -8,14 +8,12 @@ from starter.demo.ml.data import process_data
 from starter.demo.ml.model import train_model, compute_model_metrics, inference, save_model
 from sklearn.model_selection import train_test_split
 
+# root_dir = os.path.basename(os.path.abspath(starter.__file__))
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)-15s %(message)s")
-logger = logging.getLogger()
 
-#root_dir = os.path.basename(os.path.abspath(starter.__file__))
-#root_dir = os.path.abspath(starter.__file__)
+# root_dir = os.path.abspath(starter.__file__)
 root_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-logger.info(f"Abs Path: {root_dir}")
+
 
 @pytest.fixture()
 def data():
@@ -27,7 +25,7 @@ def data():
     """
     # Add code to load in the data.
     # data = pd.read_csv(os.path.join(root_dir, "data", "census_no_spaces.csv"))
-    data = pd.read_csv("../../data/census_no_spaces.csv")
+    data = pd.read_csv("data/census_no_spaces.csv")
 
     return data
 
@@ -99,6 +97,7 @@ def test_train_model(data):
     preds = model.predict(X_train)
     assert preds.shape[0] == y_train.shape[0], f"Number of predictions are different from expected."
 
+
 def test_inference(data):
     # Split dataset into training and testing set
     train, test = train_test_split(data, test_size=0.20, random_state=42)
@@ -125,6 +124,7 @@ def test_inference(data):
     model = train_model(X_train, y_train)
     preds = inference(model=model, X=X_test)
     assert preds.shape[0] == y_test.shape[0], f"Number of predictions are different from expected."
+
 
 def test_compute_model_metrics(data):
     # Split dataset into training and testing set
@@ -156,6 +156,7 @@ def test_compute_model_metrics(data):
     assert isinstance(precision, float), f"Precision dtype is different from expected."
     assert isinstance(recall, float), f"Precision dtype is different from expected."
     assert isinstance(fbeta, float), f"Precision dtype is different from expected."
+
 
 def test_save_model(data):
     # Split dataset into training and testing set
