@@ -12,7 +12,6 @@ from sklearn.model_selection import train_test_split
 
 
 # root_dir = os.path.abspath(starter.__file__)
-root_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 @pytest.fixture()
@@ -23,9 +22,10 @@ def data():
     -------
     data: pd.DataFrame
     """
+    root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     # Add code to load in the data.
-    # data = pd.read_csv(os.path.join(root_dir, "data", "census_no_spaces.csv"))
-    data = pd.read_csv("./starter/data/census_no_spaces.csv")
+    data = pd.read_csv(os.path.join(root_dir, "data", "census_no_spaces.csv"))
+    # data = pd.read_csv("/data/census_no_spaces.csv")
 
     return data
 
