@@ -14,6 +14,7 @@ from sklearn.model_selection import train_test_split
 # root_dir = os.path.abspath(starter.__file__)
 root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+
 @pytest.fixture()
 def data():
     """
