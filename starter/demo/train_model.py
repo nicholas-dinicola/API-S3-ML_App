@@ -1,6 +1,6 @@
 # Script to train machine learning model.
 from ml.data import process_data
-from ml.model import train_model, compute_model_metrics, inference, save_model
+from ml.model import train_model, compute_model_metrics, inference, save_to_file
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from joblib import dump
@@ -35,6 +35,11 @@ X_test, y_test, encoder, lb, scaler = process_data(
     test, categorical_features=cat_features, encoder=encoder, lb=lb, scaler=scaler, label="salary", training=False
 )
 
+# Save preprocessor
+save_to_file(encoder, os.path.join(root, "model", "encoder"))
+save_to_file(lb, os.path.join(root, "model", "labelbinarizer"))
+save_to_file(scaler, os.path.join(root, "model", "scaler"))
+
 # Save the encoded features
 encoded_features = pd.concat([pd.DataFrame(X_train), pd.DataFrame(X_train)], axis=0)
 encoded_features.to_csv(os.path.join(root, "data", "encoded_features.csv"), index=False)
@@ -57,9 +62,7 @@ print(
     f"Train recall: {precision},\n"
     f"Train fbeta: {fbeta}")
 
-# Save the model.
-file_pth = os.path.join(root, "model")
-
-save_model(model=model, pth=file_pth, name="my_model")
+# Save the model
+save_to_file(model.best_estimator_, os.path.join(root, "model", "classifier"))
 
 

@@ -2,7 +2,7 @@ from sklearn.metrics import fbeta_score, precision_score, recall_score
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
 import logging
-from joblib import dump
+import pickle
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)-15s %(message)s")
 logger = logging.getLogger()
@@ -93,18 +93,31 @@ def inference(model, X):
 
     return preds
 
-def save_model(model, pth: str, name: str):
+def save_to_file(instance, filename):
     """
 
     Parameters
     ----------
-    model: trained model
-    pth: path where saving  the model
+    instance: instance to save
+    filename: name of the file to save
 
     Returns
     -------
 
     """
-    logger.info(f"Savingthe model in {pth} as {name}")
-    dump(model.best_estimator_, pth + name + ".joblib")
-    logger.info("Model has been saved")
+    with open(filename, 'wb') as f:
+        pickle.dump(instance, f)
+
+
+def load_from_file(filename):
+    """
+
+    Parameters
+    ----------
+    filename: name of the file to load
+
+    Returns
+    -------
+
+    """
+    return pickle.load(open(filename, 'rb'))

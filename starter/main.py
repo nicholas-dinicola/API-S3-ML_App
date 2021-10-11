@@ -15,20 +15,20 @@ app = FastAPI()
 
 
 class ClassifierFeatureIn(BaseModel):
-    age: Union[int, float]
-    workclass: str
-    fnlwgt: Union[int, float]
-    education: str
-    education_num: Union[int, float]
-    marital_status: str
-    occupation: str
-    relationship: str
-    race: str
-    sex: str
-    capital_gain: Union[int, float]
-    capital_loss: Union[int, float]
-    hours_per_week: Union[int, float]
-    native_country: str
+    age: int = Field(..., example=39)
+    workclass: str = Field(..., example="State-gov")
+    fnlgt: int = Field(..., example=77516)
+    education: str = Field(..., example="Bachelors")
+    education_num: int = Field(..., example=13, alias="education-num")
+    marital_status: str = Field(..., example="Never-married", alias="marital-status")
+    occupation: str = Field(..., example="Adm-clerical")
+    relationship: str = Field(..., example="Not-in-family")
+    race: str = Field(..., example="White")
+    sex: str = Field(..., example="Male")
+    capital_gain: int = Field(..., example=2174, alias="capital-gain")
+    capital_loss: int = Field(..., example=0, alias="capital-loss")
+    hours_per_week: int = Field(..., example=40, alias="hours-per-week")
+    native_country: str = Field(..., example="United-States", alias="native-country")
 
 
 # Define a GET for greetings.
