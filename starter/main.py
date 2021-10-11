@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 from fastapi import FastAPI
 from typing import Union, List
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 import uvicorn
 from joblib import load
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
