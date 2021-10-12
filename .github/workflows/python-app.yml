@@ -37,7 +37,7 @@ jobs:
     - name:  Run pytest
       working-directory: ./starter
       run: |
-        pytest -s
+        python -m pytest starter/tests/ -vv
 
 
 
