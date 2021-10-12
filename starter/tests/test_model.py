@@ -25,7 +25,6 @@ def data():
     """
     # Add code to load in the data.
     data = pd.read_csv(os.path.join(root_dir, "data", "census_no_spaces.csv"))
-    # data = pd.read_csv("/data/census_no_spaces.csv")
 
     return data
 

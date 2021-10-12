@@ -10,6 +10,16 @@ from joblib import load
 from demo.ml.data import process_data
 from demo.ml.model import inference, load_from_file
 
+# root dir
+root_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Load the preprocessors and the classifier
+encoder = load_from_file(os.path.join(root_dir, "model", "encoder"))
+classifier = load_from_file(os.path.join(root_dir, "model", "classifier"))
+lb = load_from_file(os.path.join(root_dir, "model", "labelbinarizer"))
+scaler = load_from_file(os.path.join(root_dir, "model", "scaler"))
+
+
 # instantiate the app
 app = FastAPI()
 
@@ -59,7 +69,7 @@ async def get_name(name: str):
 
 @app.post("/predict", response_model=ClassifierOut, status_code=200)
 async def predict(data1: ClassifierFeatureIn):
-    data = pd.DataFrame.from_dict(data1.dict(by_alias=True))
+    data = pd.DataFrame.from_dict([data1.dict(by_alias=True)])
 
     cat_features = [
         "workclass",
@@ -72,12 +82,6 @@ async def predict(data1: ClassifierFeatureIn):
         "native-country",
     ]
 
-    # Load the preprocessors and the classifier
-    encoder = load_from_file('model/encoder')
-    classifier = load_from_file('model/classsifer')
-    lb = load_from_file('model/labelbinarizer')
-    scaler = load_from_file('model/scaler')
-
     # Preprocess the data
     X, _, _, _, _ = process_data(
         data, categorical_features=cat_features, encoder=encoder, lb=lb, scaler=scaler, training=False
@@ -85,9 +89,9 @@ async def predict(data1: ClassifierFeatureIn):
 
     # Predict salary
     preds = inference(classifier, X.reshape(1, 108))
-
+    # preds = inference(classifier, X)
     # convert output from 0,1 to <50k,>50k
-    preds = loaded_lb.inverse_transform(preds)
+    preds = lb.inverse_transform(preds)
 
     return {
         "prediction": preds[0]

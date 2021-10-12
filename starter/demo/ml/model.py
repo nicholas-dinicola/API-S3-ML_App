@@ -121,4 +121,6 @@ def load_from_file(filename):
     -------
 
     """
-    return pickle.load(open(f"{filename}.pkl", 'rb'))
+    with open(f"{filename}.pkl", 'rb') as f:
+        model = pickle.load(f)
+    return model
