@@ -7,6 +7,7 @@ import pickle
 logging.basicConfig(level=logging.INFO, format="%(asctime)-15s %(message)s")
 logger = logging.getLogger()
 
+
 # Optional: implement hyperparameter tuning.
 def train_model(X_train, y_train):
     """
@@ -48,7 +49,6 @@ def train_model(X_train, y_train):
 
     model = model_cv
     return model
-
 
 
 def compute_model_metrics(y, preds):
@@ -93,6 +93,7 @@ def inference(model, X):
 
     return preds
 
+
 def save_to_file(instance, filename):
     """
 
@@ -105,7 +106,7 @@ def save_to_file(instance, filename):
     -------
 
     """
-    with open(filename, 'wb') as f:
+    with open(f"{filename}.pkl", 'wb') as f:
         pickle.dump(instance, f)
 
 
@@ -120,4 +121,4 @@ def load_from_file(filename):
     -------
 
     """
-    return pickle.load(open(filename, 'rb'))
+    return pickle.load(open(f"{filename}.pkl", 'rb'))
