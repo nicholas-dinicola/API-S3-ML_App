@@ -4,3 +4,7 @@
 /encoder
 /labelbinarizer
 /scaler
+/classifier.pkl
+/encoder.pkl
+/labelbinarizer.pkl
+/scaler.pkl
