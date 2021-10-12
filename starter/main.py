@@ -10,7 +10,7 @@ from joblib import load
 from demo.ml.data import process_data
 from demo.ml.model import inference, load_from_file
 
-# root dir
+# get the project root dir
 root_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Load the preprocessors and the classifier
@@ -58,13 +58,13 @@ class ClassifierOut(BaseModel):
 # Define a GET for greetings.
 @app.get("/")
 async def greet_user():
-    return {"message": "Hello User!"}
+    return {"Hello User!"}
 
 
 # Greet the user with his/her name
 @app.get("/{name}")
 async def get_name(name: str):
-    return {"Welcome to this app": f"{name}"}
+    return {f"Welcome to this app, {name}"}
 
 
 @app.post("/predict", response_model=ClassifierOut, status_code=200)
