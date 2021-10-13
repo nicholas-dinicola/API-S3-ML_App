@@ -10,6 +10,7 @@ from joblib import load
 from demo.ml.data import process_data
 from demo.ml.model import inference, load_from_file
 
+
 # get the project root dir
 root_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -49,11 +50,12 @@ class ClassifierFeatureIn(BaseModel):
     native_country: str = Field(..., example="United-States", alias="native-country")
 
 
+"""
 # pydantic output of the model
 class ClassifierOut(BaseModel):
     # The forecast output will be either >50K or <50K
-    forecast: str = "Income > 50k"
-
+    forecast: str = "Income <=50k"
+"""
 
 # Define a GET for greetings.
 @app.get("/")
@@ -66,9 +68,9 @@ async def greet_user():
 async def get_name(name: str):
     return {f"Welcome to this app, {name}"}
 
-
-@app.post("/predict", response_model=ClassifierOut, status_code=200)
-async def predict(data1: ClassifierFeatureIn):
+# response_model=ClassifierOut, status_code=200
+@app.post("/predict")
+def predict(data1: ClassifierFeatureIn):
     data = pd.DataFrame.from_dict([data1.dict(by_alias=True)])
 
     cat_features = [
