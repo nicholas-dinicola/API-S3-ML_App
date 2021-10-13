@@ -7,6 +7,5 @@ fastapi==0.63.0
 uvicorn~=0.15.0
 gunicorn
 dvc
-joblib~=1.1.0
 pydantic~=1.8.2
-setuptools~=58.2.0
+git
