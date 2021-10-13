@@ -10,7 +10,6 @@ from joblib import load
 from demo.ml.data import process_data
 from demo.ml.model import inference, load_from_file
 
-
 # get the project root dir
 root_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -19,7 +18,6 @@ encoder = load_from_file(os.path.join(root_dir, "model", "encoder"))
 classifier = load_from_file(os.path.join(root_dir, "model", "classifier"))
 lb = load_from_file(os.path.join(root_dir, "model", "labelbinarizer"))
 scaler = load_from_file(os.path.join(root_dir, "model", "scaler"))
-
 
 # instantiate the app
 app = FastAPI()
@@ -57,6 +55,7 @@ class ClassifierOut(BaseModel):
     forecast: str = "Income <=50k"
 """
 
+
 # Define a GET for greetings.
 @app.get("/")
 async def greet_user():
@@ -67,6 +66,7 @@ async def greet_user():
 @app.get("/{name}")
 async def get_name(name: str):
     return {f"Welcome to this app, {name}"}
+
 
 # response_model=ClassifierOut, status_code=200
 @app.post("/predict")
