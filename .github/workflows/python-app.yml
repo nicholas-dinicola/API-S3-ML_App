@@ -2,6 +2,7 @@
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
 
 # python -m pytest starter/tests/ -vv
+# python -m pytest tests/ -vv
 
 name: CI
 
@@ -36,9 +37,9 @@ jobs:
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name:  Run pytest
-      working-directory: ./CI-CD-API-ML_App
+      working-directory: ./starter
       run: |
-        python -m pytest tests/ -vv
+        python -s
 
 
 
