@@ -4,7 +4,7 @@ import json
 import sys
 
 sys.path.insert(0, 'starter/demo/ml')
-sys.path.insert(0, 'starter/model')
+sys.path.insert(1, 'starter/model')
 from starter.main import app
 
 client = TestClient(app)
