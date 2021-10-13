@@ -3,6 +3,7 @@
 
 # python -m pytest starter/tests/ -vv
 # python -m pytest tests/ -vv
+#python -s
 
 name: CI
 
@@ -48,7 +49,6 @@ jobs:
     - name:  Run pytest
       working-directory: ./starter
       run: |
-    #python -s
         pytest starter/tests.py
         pytest starter/api_tests.py
 
