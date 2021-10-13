@@ -3,7 +3,7 @@ from fastapi.testclient import TestClient
 import json
 import sys
 
-#sys.path.insert(0, './demo/')
+sys.path.insert(0, 'starter/demo/ml')
 from starter.main import app
 
 client = TestClient(app)
