@@ -29,17 +29,6 @@ def data():
     return data
 
 
-def test_dataset(data):
-    """
-    Testing if the dataset is a pandas dataframe
-    Returns
-    -------
-
-    """
-    assert isinstance(data, pd.DataFrame), f"Dataset is not a pandas dataframe"
-    assert data.shape == data.dropna().shape, f"Dataset has got missing values"
-
-
 def test_process_data(data):
     """
     Testing train_model func,
